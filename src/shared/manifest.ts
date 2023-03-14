@@ -3,13 +3,15 @@ import type { ResolverManifest } from "pixi.js";
 export const manifest: ResolverManifest = {
     bundles: [
         {
-            name: "logo",
+            name: "entities",
             assets: {
-                "vite-logo": "logo/vite-logo.png",
-                "ts-logo": "logo/ts-logo.png",
-                "pixi-logo": "logo/pixi-logo.png"
             }
         },
+        {
+            name: "objects",
+            assets: {
+            }
+        }, 
         {
             name: "sound",
             assets: {
