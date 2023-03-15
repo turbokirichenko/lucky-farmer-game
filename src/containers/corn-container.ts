@@ -7,15 +7,12 @@ import { EntityContainer } from "../prefabs/entity-container";
 
 export class CornContainer extends EntityContainer {
     constructor(position: Vector2d) {
-        super(position, new CornSprite(), CornBucketSprite);
+        super(position, new CornSprite(), CornBucketSprite, "corn");
         this.timer = CORN_SPAWN_TIME;
-        this.resourceName = "corn";
-        this.bonus = 20;
     }
 
     spawnedObjectAction(e: any): void {
         e = null;
         Player.modifyResource(this.resourceName, this.bonus);
-        this.destroy();
     }
 }

@@ -1,9 +1,9 @@
 import { AnimatedSprite, Container, Sprite } from "pixi.js";
 import { PLACE_HEIGHT, PLACE_WIDTH } from "../shared/constants";
-import { Vector2d, ResourceNames, IEntity } from "../shared/types";
+import { Vector2d, ResourceNames, ResourcesBonus, IEntity, IScene } from "../shared/types";
 import { GameObjectContainer } from "./game-object-container";
 
-export class EntityContainer extends Container implements IEntity {
+export class EntityContainer extends Container implements IEntity, IScene {
     private _timestamp: number;
 
     public get timestamp() {
@@ -34,7 +34,7 @@ export class EntityContainer extends Container implements IEntity {
         this._bonus = value;
     }
 
-    private _resourceName?: ResourceNames;
+    private _resourceName: ResourceNames;
 
     public get resourceName() {
         return this._resourceName!;
@@ -56,6 +56,7 @@ export class EntityContainer extends Container implements IEntity {
         position: Vector2d, 
         child: Sprite | AnimatedSprite, 
         Prefab: typeof Sprite,
+        name: ResourceNames,
     ) {
         super();
         child.anchor.set(0);
@@ -63,6 +64,8 @@ export class EntityContainer extends Container implements IEntity {
         this._placePosition = position;
         this._timestamp = Date.now();
         this._Prefab = Prefab;
+        this._resourceName = name;
+        this._bonus = ResourcesBonus[name];
     }
 
     update() {
@@ -70,28 +73,29 @@ export class EntityContainer extends Container implements IEntity {
         const diff = Date.now() - this._timestamp;
         if (diff >= this._timer) {
             this._timestamp = Date.now();
-            this.spawn(this.spawnedObjectAction);
+            this.spawn(this.spawnedObjectAction, this);
         }
     }
 
-    spawn(objectPoinerAction: (e: any) => void) {
+    resize () {
+
+    }
+
+    spawn(objectPoinerAction: (e: any) => void, context: EntityContainer) {
         const res = new this._Prefab();
-        const xRange = PLACE_WIDTH/4 + Math.random()*PLACE_WIDTH/2;
-        const yRange = PLACE_HEIGHT - PLACE_HEIGHT/4;
         const objectPosition = {
-            x : this.position.x + xRange, 
-            y: this.position.y + yRange
+            x : this.position.x + PLACE_WIDTH/2,
+            y: this.position.y + PLACE_HEIGHT/2 
         };
         const objectContainer = GameObjectContainer.fromSprite(
             res, 
             objectPosition, 
-            objectPoinerAction
+            objectPoinerAction.bind(context)
         );
         this.parent.addChild(objectContainer);
     }
 
     spawnedObjectAction (e: any) {
         e = null;
-        this.destroy();
     }
 }

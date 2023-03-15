@@ -1,10 +1,12 @@
 import { AnimatedSprite, Sprite } from "pixi.js";
-import { IEntity, Vector2d } from "../shared/types";
+import { IEntity, ResourceNames, Vector2d } from "../shared/types";
 import { Player } from "../entities/player";
+import { LightEffectSprite } from "../sprites/light-effect-sprite";
 import { EntityContainer } from "./entity-container";
 
 export class AnimalContainer extends EntityContainer implements IEntity {
     private _active = false; // when 'true', that may spawn objects
+
     public get active() {
         return this._active;
     }
@@ -21,14 +23,28 @@ export class AnimalContainer extends EntityContainer implements IEntity {
         position: Vector2d, 
         sprite: AnimatedSprite | Sprite,
         Prefab: typeof Sprite,
+        name: ResourceNames,
     ) {
-        super(position, sprite, Prefab);
+        super(position, sprite, Prefab, name);
         this._hungryTimestamp = this.timestamp;
+        this.interactive = true;
+        this.on("pointertap", () => {
+            this.tapToAnimal();
+        });
     }
 
     feed() {
         this._active = true;
-        this._hungryTimestamp = this.timestamp = Date.now();
+        this._hungryTimestamp = Date.now();
+        const lightEffect = new LightEffectSprite();
+        lightEffect.x = this.width/2;
+        lightEffect.y = this.height/2;
+        this.addChild(lightEffect);
+        lightEffect.play();
+        lightEffect.onComplete = () => {
+            this.removeChild(lightEffect);
+            lightEffect.destroy();
+        }
     }
 
     update() {
@@ -41,7 +57,7 @@ export class AnimalContainer extends EntityContainer implements IEntity {
         const hungryDiff = now - this._hungryTimestamp;
         if (diff >= this.timer) {
             this.timestamp = now;
-            this.spawn(this.spawnedObjectAction);
+            this.spawn(this.spawnedObjectAction, this);
         }
         if (hungryDiff >= this._hungryTimer) {
             this._active = false;
@@ -51,7 +67,14 @@ export class AnimalContainer extends EntityContainer implements IEntity {
 
     spawnedObjectAction (e: any) {
         e = null;
-        Player.modifyResource(this.resourceName!, this.bonus);
-        this.destroy();
+        Player.modifyResource(this.resourceName, this.bonus);
+    }
+
+    tapToAnimal() {
+        const price = 4;
+        if(price < Player.resources["corn"]) {
+            Player.modifyResource("corn", -1*price)
+            this.feed();
+        }
     }
 }

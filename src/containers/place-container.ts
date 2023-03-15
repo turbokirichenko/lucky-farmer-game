@@ -1,8 +1,9 @@
 import { Container } from 'pixi.js';
 import { PLACE_WIDTH, PLACE_HEIGHT } from '../shared/constants';
+import { IScene } from '../shared/types';
 import { GroundSprite } from '../sprites/ground-sprite';
 
-export class PlaceContainer extends Container {
+export class PlaceContainer extends Container implements IScene {
 
     constructor() {
         super();
@@ -19,6 +20,14 @@ export class PlaceContainer extends Container {
             this.createSprite(getNumber(), 3),
             this.createSprite(getNumber(), 4)
         );
+    }
+
+    update () {
+
+    }
+
+    resize () {
+        
     }
 
     private createSprite(element: 1 | 2 | 3, position: 1 | 2 | 3 | 4) {

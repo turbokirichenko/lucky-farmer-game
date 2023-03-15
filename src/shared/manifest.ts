@@ -27,9 +27,21 @@ export const manifest: ResolverManifest = {
             }
         },
         {
+            name: "effects",
+            assets: {
+                "light-effect": "assets/light-effect.json"
+            }
+        },
+        {
             name: "sound",
             assets: {
                 "forklift-effect": "sound/forklift-effect.wav"
+            }
+        },
+        {
+            name: "fonts",
+            assets: {
+                "PixeloidMono": "fonts/PixeloidMono.ttf"
             }
         }
     ]

@@ -15,7 +15,7 @@ export class Player {
 
     public static modifyResource(resourceName: ResourceNames, amount: number = 1): Boolean {
         if (this._resources[resourceName] + amount < 0) return false;
-        this._resources[resourceName] += amount;
+        if (resourceName in this._resources) this._resources[resourceName] += amount;
         return true;
     }
 }

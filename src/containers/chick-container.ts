@@ -6,14 +6,8 @@ import { CHICK_HUNGER_TIME, CHICK_SPAWN_TIME } from "../shared/constants";
 
 export class ChickContainer extends AnimalContainer {
     constructor(position: Vector2d) {
-        super(position, new ChickSprite(), EggSprite);
+        super(position, new ChickSprite(), EggSprite, "eggs");
         this.timer = CHICK_SPAWN_TIME;
         this.hungryTimer = CHICK_HUNGER_TIME;
-        this.resourceName = "eggs";
-        this.bonus = 10;
-        this.interactive = true;
-        this.on("pointertap", () => {
-            this.feed();
-        });
     }
 }

@@ -20,3 +20,9 @@ export interface IEntity {
     update(): void;
     spawnedObjectAction: PointerAction;
 }
+
+export enum ResourcesBonus {
+    corn = 3,
+    milk = 2,
+    eggs = 1
+}
