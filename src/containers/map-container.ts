@@ -1,10 +1,11 @@
-import { Container, Sprite } from 'pixi.js';
-import { Size } from '../shared/types';
+import { Container } from 'pixi.js';
+import { Size, IScene } from '../shared/types';
 import { MAP_COLS, MAP_ROWS, PLACE_HEIGHT, PLACE_WIDTH } from '../shared/constants';
-import { IScene } from '../shared/scene-manager';
 import { PlaceContainer } from './place-container';
-import { EntityContainer } from './entity-container';
+import { EntityContainer } from '../prefabs/entity-container';
 import { CowContainer } from './cow-container';
+import { ChickContainer } from './chick-container';
+import { CornContainer } from './corn-container';
 
 export class MapContainer extends Container implements IScene {
 
@@ -60,11 +61,11 @@ export class MapContainer extends Container implements IScene {
     }
 
     private drawCorns (): EntityContainer[] {
-        let corns = [];
+        let corns: EntityContainer[] = [];
         for (let i = 0; i < this._rows; ++i) {
             for (let j = 0; j < this._cols; ++j) {
                 if (Math.random() > 0.9 && corns.length < 9) {
-                    const corn = new CowContainer({x: i+1, y: j+1});
+                    const corn = new CornContainer({x: i+1, y: j+1});
                     corn.x = i*this._placeSize.width;
                     corn.y = j*this._placeSize.height;
                     corns.push(corn);

@@ -1,13 +1,7 @@
 import { Container, Sprite } from 'pixi.js';
-import { IScene } from '../shared/scene-manager';
+import { IScene } from '../shared/types';
 
-export class EntitiesBarContainer extends Container implements IScene {
+export class EntitiesBarContainer extends Container {
     
-    update() {
 
-    }
-
-    resize() {
-
-    }
 }

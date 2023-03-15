@@ -1,0 +1,15 @@
+/# folder structure of project
+
+public/ # contains all assets
+src/ 
+    shared/ # contain libs, constants: (ui-kit, crypto, types, ...)
+    entities/ # business processes: (user, player, ...)
+    sprites/ # contains sprites using from game
+    prefabs/ # contains abstract objects and interfaces
+    containers/ # game UI objects (loading bar, panel menu, ...)
+    scenes/ # game screens: like loading screen or settings screen
+    - main.ts # entry point
+    - index.ts # main logic
+    - style.css # css canvas styles
+
+#@!!! each level may import files only from the level that have higher position of path's hierarchy

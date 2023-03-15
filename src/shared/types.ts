@@ -1,4 +1,4 @@
-import { AnimatedSprite, Container, Sprite } from 'pixi.js';
+import { DisplayObject } from 'pixi.js';
 
 export interface Resources { "corn": number; "milk": number; "eggs": number; }
 
@@ -8,7 +8,15 @@ export interface Size { width: number; height: number };
 
 export type ResourceNames = "corn" | "milk" | "eggs";
 
-export interface IEntity extends Container {
-    updateTrigger(): void;
-    spawnResource(): Sprite | AnimatedSprite;
+export type PointerAction = (e: any) => void;
+
+export interface IScene extends DisplayObject {
+    update(framesPassed: number): void;
+    // we added the resize method to the interface
+    resize(screenWidth: number, screenHeight: number): void;
+}
+
+export interface IEntity {
+    update(): void;
+    spawnedObjectAction: PointerAction;
 }

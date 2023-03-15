@@ -1,5 +1,5 @@
 import { Container, Sprite } from 'pixi.js';
-import { IScene } from '../shared/scene-manager';
+import { IScene } from '../entities/scene-manager';
 import { MapContainer } from '../containers/map-container';
 import { ResourcesBarContainer } from '../containers/resources-bar-container';
 import { EntitiesBarContainer } from '../containers/entities-bar-container';

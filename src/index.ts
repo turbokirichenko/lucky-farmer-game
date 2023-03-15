@@ -1,4 +1,4 @@
-import { SceneManager } from './shared/scene-manager';
+import { SceneManager } from './entities/scene-manager';
 import { LoaderScene } from './scenes/loader-scene';
 import { FILL_COLOR } from './shared/constants';
 

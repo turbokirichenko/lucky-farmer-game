@@ -1,6 +1,7 @@
-import { Application, DisplayObject } from "pixi.js";
+import { Application } from "pixi.js";
 import { Stage, Layer } from "@pixi/layers";
 import { diffuseGroup, normalGroup, lightGroup } from "@pixi/lights";
+import { IScene } from "../shared/types";
 
 export class SceneManager {
     //class is almost will be static
@@ -58,10 +59,4 @@ export class SceneManager {
             SceneManager._currentScene.resize(SceneManager.width, SceneManager.height);
         }
     }
-}
-
-export interface IScene extends DisplayObject {
-    update(framesPassed: number): void;
-    // we added the resize method to the interface
-    resize(screenWidth: number, screenHeight: number): void;
 }
