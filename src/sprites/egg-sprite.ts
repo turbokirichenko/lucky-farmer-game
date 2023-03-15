@@ -1,7 +1,9 @@
-import { Sprite } from "pixi.js";
+import { Sprite, Texture } from "pixi.js";
 
 export class EggSprite extends Sprite {
     constructor() {
-        super();
+        const texture = Texture.from("egg");
+        super(texture);
+        this.anchor.set(0.5);
     }
 }

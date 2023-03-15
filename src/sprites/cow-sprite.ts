@@ -1,7 +1,12 @@
-import { Sprite } from "pixi.js";
+import { AnimatedSprite, Assets } from "pixi.js";
 
-export class CowSprite extends Sprite {
+export class CowSprite extends AnimatedSprite {
     constructor() {
-        super();
+        const textures = Assets.get("cow").textures;
+        const sheet = Object.values(textures);
+        super(sheet);
+        this.animationSpeed = 0.1;
+        this.anchor.set(0.5);
+        this.play();
     }
 }
