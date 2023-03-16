@@ -29,7 +29,8 @@ export const manifest: ResolverManifest = {
         {
             name: "effects",
             assets: {
-                "light-effect": "assets/light-effect.json"
+                "light-effect": "assets/light-effect.json",
+                "fire-loop": "assets/fire-effect.json"
             }
         },
         {

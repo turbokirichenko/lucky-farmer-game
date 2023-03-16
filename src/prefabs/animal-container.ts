@@ -1,11 +1,13 @@
 import { AnimatedSprite, Sprite } from "pixi.js";
 import { IEntity, ResourceNames, Vector2d } from "../shared/types";
 import { Player } from "../entities/player";
+import { FireLoopSprite } from "../sprites/fire-loop-sprite";
 import { LightEffectSprite } from "../sprites/light-effect-sprite";
 import { EntityContainer } from "./entity-container";
 
 export class AnimalContainer extends EntityContainer implements IEntity {
     private _active = false; // when 'true', that may spawn objects
+    private _activeEffect: AnimatedSprite;
 
     public get active() {
         return this._active;
@@ -28,6 +30,12 @@ export class AnimalContainer extends EntityContainer implements IEntity {
         super(position, sprite, Prefab, name);
         this._hungryTimestamp = this.timestamp;
         this.interactive = true;
+        this._activeEffect = new FireLoopSprite();
+        this._activeEffect.x = this.width/2;
+        this._activeEffect.y = this.height/4;
+        this._activeEffect.play();
+        this._activeEffect.alpha = 0;
+        this.addChild(this._activeEffect);
         this.on("pointertap", () => {
             this.tapToAnimal();
         });
@@ -35,6 +43,7 @@ export class AnimalContainer extends EntityContainer implements IEntity {
 
     feed() {
         this._active = true;
+        this._activeEffect.alpha = 1;
         this._hungryTimestamp = Date.now();
         const lightEffect = new LightEffectSprite();
         lightEffect.x = this.width/2;
@@ -61,6 +70,7 @@ export class AnimalContainer extends EntityContainer implements IEntity {
         }
         if (hungryDiff >= this._hungryTimer) {
             this._active = false;
+            this._activeEffect.alpha = 0;
             this._hungryTimestamp = this.timestamp = now;
         }
     }
