@@ -1,4 +1,4 @@
-import { Application } from "pixi.js";
+import { Application} from "pixi.js";
 import { Stage, Layer } from "@pixi/layers";
 import { diffuseGroup, normalGroup, lightGroup } from "@pixi/lights";
 import { IScene } from "../shared/types";

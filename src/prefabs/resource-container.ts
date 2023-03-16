@@ -2,14 +2,12 @@ import { Sprite, Container, Graphics, TextStyle, Text } from "pixi.js";
 import { IScene } from "../shared/types";
 
 export class ResourceContainer extends Container implements IScene {
-
     private _slotSprite: Sprite;
     private _slotText: Text;
     private _value: number;
     private _currentValue: number;
     private _borderFrame: Graphics;
     private _slot: Container;
-
     private _slotWidth: number;
     private _slotHeight: number;
 
@@ -27,16 +25,17 @@ export class ResourceContainer extends Container implements IScene {
         const framePosX = 0;
         const framePosY = 0;
         this._borderFrame.beginFill(0xc0d470, 1);
-        this._borderFrame.drawRect(framePosX, framePosY, slotWidth, slotHeight);
+        this._borderFrame.drawRect(framePosX, framePosY, this._slotWidth, this._slotHeight);
         this._borderFrame.endFill();
         this._slot = new Container()
         this._slotSprite = slotSprite;
+        this._slotSprite.scale.set(0.8, 0.8);
         this._slotSprite.anchor.set(0.5);
         this._slotSprite.x = slotWidth / 4;
         this._slotSprite.y = slotHeight / 2;
         const textStyle = new TextStyle({
             fontFamily: 'PixeloidMono',
-            fontSize: 24,
+            fontSize: 16,
             fill: [0xffffff]
         })
         this._slotText = new Text(data.toString(), textStyle);

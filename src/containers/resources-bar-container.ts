@@ -16,7 +16,7 @@ export class ResourcesBarContainer extends Container<IScene> implements IScene {
         this.addChild(...this._slots);
     }
 
-    update(framesPassed: number) {
+    update(framesPassed: number, timestamp: number) {
         const playerData = [
             Player.resources.corn,
             Player.resources.eggs,
@@ -45,7 +45,7 @@ export class ResourcesBarContainer extends Container<IScene> implements IScene {
             Player.resources.milk
         ];
         let slots = [];
-        const gap = 50;
+        const gap = 0;
         const slotWidth = (barWidth - gap*(numSlots - 1))/numSlots;
         const slotHeight = barHeight;
         for (let i = 0; i < numSlots; ++i) {

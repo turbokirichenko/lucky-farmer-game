@@ -1,9 +1,9 @@
 import { AnimatedSprite, Container, Sprite } from "pixi.js";
 import { PLACE_HEIGHT, PLACE_WIDTH } from "../shared/constants";
-import { Vector2d, ResourceNames, ResourcesBonus, IEntity, IScene } from "../shared/types";
+import { Vector2d, ResourceNames, ResourcesBonus, IEntity } from "../shared/types";
 import { GameObjectContainer } from "./game-object-container";
 
-export class EntityContainer extends Container implements IEntity, IScene {
+export class EntityContainer extends Container implements IEntity {
     private _timestamp: number;
 
     public get timestamp() {
@@ -66,22 +66,21 @@ export class EntityContainer extends Container implements IEntity, IScene {
         this._Prefab = Prefab;
         this._resourceName = name;
         this._bonus = ResourcesBonus[name];
+        this.x = PLACE_WIDTH*position.x;
+        this.y = PLACE_HEIGHT*position.y;
     }
 
-    update() {
-        if (!this._timer) return;
-        const diff = Date.now() - this._timestamp;
+    pick(newTimestamp: number): GameObjectContainer | null  {
+        if (!this._timer) return null;
+        const diff = newTimestamp - this._timestamp;
         if (diff >= this._timer) {
-            this._timestamp = Date.now();
-            this.spawn(this.spawnedObjectAction, this);
+            this._timestamp = newTimestamp;
+            return this.spawn(this.spawnedObjectAction, this);
         }
+        return null;
     }
 
-    resize () {
-
-    }
-
-    spawn(objectPoinerAction: (e: any) => void, context: EntityContainer) {
+    spawn(objectPoinerAction: (e: any) => void, context: EntityContainer): GameObjectContainer {
         const res = new this._Prefab();
         const objectPosition = {
             x : this.position.x + PLACE_WIDTH/2,
@@ -92,7 +91,7 @@ export class EntityContainer extends Container implements IEntity, IScene {
             objectPosition, 
             objectPoinerAction.bind(context)
         );
-        this.parent.addChild(objectContainer);
+        return objectContainer;
     }
 
     spawnedObjectAction (e: any) {
