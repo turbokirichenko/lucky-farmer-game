@@ -1,6 +1,6 @@
 import { Container, Assets } from 'pixi.js'
 import { LoadingBarContainer } from '../containers/loading-bar-container';
-import { SceneManager, IScene } from '../shared/scene-manager';
+import { SceneManager, IScene } from '../entities/scene-manager';
 import { GameScene } from './game-scene';
 import { manifest } from '../shared/manifest';
 import { sound } from "@pixi/sound";
