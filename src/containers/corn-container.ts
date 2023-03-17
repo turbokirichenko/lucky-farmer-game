@@ -11,8 +11,7 @@ export class CornContainer extends EntityContainer {
         this.timer = CORN_SPAWN_TIME;
     }
 
-    spawnedObjectAction(e: any): void {
-        e = null;
+    spawnedObjectAction(): void {
         Player.modifyResource(this.resourceName, this.bonus);
     }
 }

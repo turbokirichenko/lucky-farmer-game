@@ -1,12 +1,12 @@
-### Pixi JS + Typescript + Vite template
+### Lucky Farmer Game
 
-#### Just clone this repo and start to develop your own game!
+#### My pet pixel farm game
 
-![just clone this repo and start to develop your own game](https://github.com/turbokirichenko/pixijs-typescript-vite-template/blob/main/public/logo/pixi-logo.png)
+![lucky farmer](https://github.com/turbokirichenko/lucky-farmer-game/blob/develop/public/overview/screenshot-1.PNG)
 
 :white_check_mark: pixi version 7
 :white_check_mark: vanilla typescript
-:white_check_mark: for game development
+:white_check_mark: oop
 
 ##### get started
 
@@ -22,9 +22,3 @@ $ npm run dev -- --host
 $ npm run build
 ```
 
-##### source
-
-[pixi elementals](https://www.pixijselementals.com/#before-we-even-start)
-[pixi js official website](https://pixijs.com/)
-[vite guide](https://vitejs.dev/guide/)
-[typescript handbook](https://www.typescriptlang.org/docs/handbook/intro.html)

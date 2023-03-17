@@ -4,7 +4,7 @@ import { Player } from '../entities/player';
 import { CornBucketSprite } from '../sprites/corn-bucket-sprite';
 import { EggSprite } from '../sprites/egg-sprite';
 import { MilkSprite } from '../sprites/milk-sprite';
-import { ResourceContainer } from '../prefabs/resource-container';
+import { ResourceContainer } from './resource-container';
 
 export class ResourcesBarContainer extends Container<IScene> implements IScene {
     
@@ -45,7 +45,7 @@ export class ResourcesBarContainer extends Container<IScene> implements IScene {
             Player.resources.milk
         ];
         let slots = [];
-        const gap = 50;
+        const gap = 0;
         const slotWidth = (barWidth - gap*(numSlots - 1))/numSlots;
         const slotHeight = barHeight;
         for (let i = 0; i < numSlots; ++i) {

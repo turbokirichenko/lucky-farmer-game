@@ -1,6 +1,8 @@
-import { DisplayObject } from 'pixi.js';
+import { DisplayObject, FederatedPointerEvent } from 'pixi.js';
 
 export interface Resources { "corn": number; "milk": number; "eggs": number; }
+
+export interface PriceList { "corn": number, "cow": number, "chick": number; }
 
 export interface Vector2d { x: number; y: number };
 
@@ -8,17 +10,25 @@ export interface Size { width: number; height: number };
 
 export type ResourceNames = "corn" | "milk" | "eggs";
 
+export type EntitiesNames = "corn" | "cow" | "chick";
+
 export type PointerAction = (e: any) => void;
 
 export interface IScene extends DisplayObject {
-    update(framesPassed: number): void;
+    update(framesPassed: number, timestamp?: number): void;
     // we added the resize method to the interface
     resize(screenWidth: number, screenHeight: number): void;
 }
 
+export interface IDraggable extends DisplayObject {
+    onDragStart(): void;
+    onDragEnd(): void;
+    onDragMove(event: FederatedPointerEvent): void;
+}
+
 export interface IEntity {
-    update(): void;
-    spawnedObjectAction: PointerAction;
+    pick(newTimestamp: number): DisplayObject | null;
+    spawnedObjectAction(context?: any): void;
 }
 
 export enum ResourcesBonus {
@@ -26,3 +36,11 @@ export enum ResourcesBonus {
     milk = 2,
     eggs = 1
 }
+
+export type TilePostfix = 
+"1" | "2" | "3" 
+| "left" | "left-top" | "left-bottom"
+| "right" | "right-top" | "right-bottom"
+| "center" | "top" | "bottom"
+
+export type SizeNames = "Small" | "Medium" | "Large";
