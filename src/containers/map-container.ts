@@ -29,7 +29,7 @@ export class MapContainer extends Container implements IScene {
         return this!._rows;
     }
 
-    constructor(parentWidth: number, parentHeight: number) {
+    constructor() {
         super();
         this.sortableChildren = true;
         this._cols = MAP_COLS;
@@ -91,8 +91,8 @@ export class MapContainer extends Container implements IScene {
     }
 
     isFree(placePosition: Vector2d): boolean | null {
-        if (placePosition.x < 0 || placePosition.x > this._cols) return null;
-        if (placePosition.x < 0 || placePosition.x > this._rows) return null;
+        if (placePosition.x < 0 || placePosition.x >= this._cols - 1) return null;
+        if (placePosition.x < 0 || placePosition.y >= this._rows - 1) return null;
         const len = this._entitiesLayer.children.length;
         let isFreeFlag = true;
         for (let i = 0; i < len; ++i) {
@@ -107,9 +107,9 @@ export class MapContainer extends Container implements IScene {
  
     private drawMap (): Container<PlaceContainer> {
         let places = new Container<PlaceContainer>();
-        for (let i = 0; i < this._rows; ++i) {
-            for (let j = 0; j < this._cols; ++j) {
-                const place = new PlaceContainer();
+        for (let i = -1; i <= this._rows; ++i) {
+            for (let j = -1; j <= this._cols; ++j) {
+                const place = new PlaceContainer({x: i, y: j});
                 place.x = i*this._placeSize.width;
                 place.y = j*this._placeSize.height;
                 places.addChild(place);
@@ -145,9 +145,5 @@ export class MapContainer extends Container implements IScene {
             }
         }
         return corns;
-    }
-
-    private drawBorder (): PlaceContainer[] {
-        return [];
     }
 }

@@ -36,3 +36,9 @@ export enum ResourcesBonus {
     milk = 2,
     eggs = 1
 }
+
+export type TilePostfix = 
+"1" | "2" | "3" 
+| "left" | "left-top" | "left-bottom"
+| "right" | "right-top" | "right-bottom"
+| "center" | "top" | "bottom"

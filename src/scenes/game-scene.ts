@@ -17,9 +17,9 @@ export class GameScene extends Container implements IScene {
         super();
         this._userAttention = null;
         // draw game map in center
-        this._gameMap = new MapContainer(parentWidth, parentHeight);
+        this._gameMap = new MapContainer();
         this._gameMap.scale = {x: 1, y: 1};
-        this._gameMap.x = (parentWidth - this._gameMap.width)/2;
+        this._gameMap.x = (parentWidth - this._gameMap.width)/2 + PLACE_WIDTH/2;
         this._gameMap.y = PLACE_HEIGHT*1.5;
         this.addChild(this._gameMap);  
         // draw resource bar on header
@@ -55,10 +55,18 @@ export class GameScene extends Container implements IScene {
         }
     }
 
-    resize(parentWidth: number, parentHeight: number): void {
+    resize(parentWidth: number): void {
         //
-        this._gameMap.x = (parentWidth - this._gameMap.width)/2;
-        this._gameMap.y = (parentHeight - this._gameMap.height)/2;
+        this._gameMap.x = (parentWidth - this._gameMap.width)/2 + PLACE_WIDTH/2;
+        this._gameMap.y = PLACE_HEIGHT*1.5;
+        //
+        const entitiesBarWidth = PLACE_HEIGHT*MAP_COLS/2;
+        this._userEntitiesBar.x = (parentWidth - entitiesBarWidth)/2;
+        this._userEntitiesBar.y = PLACE_HEIGHT*MAP_ROWS + PLACE_HEIGHT*2 + 10;
+        //
+        const resourceBarWidth = PLACE_WIDTH*MAP_COLS/2;
+        this._userResourcesBar.x = (parentWidth - resourceBarWidth)/2;
+        this._userResourcesBar.y = 10;
     }
 
     private onSpawnFromMap(event: FederatedPointerEvent, parentWidth: number, parentHeight: number) {
