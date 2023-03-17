@@ -19,6 +19,13 @@ export const manifest: ResolverManifest = {
             }
         }, 
         {
+            name: "images",
+            assets: {
+                "sky-background": "assets/farm-background.gif",
+                "start": "assets/start.png"
+            }
+        },
+        {
             name: "tiles",
             assets: {
                 "tile-1": "assets/tile-1.png",

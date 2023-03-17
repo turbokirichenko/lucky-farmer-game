@@ -13,6 +13,7 @@
     "vite": "^4.1.0"
   },
   "dependencies": {
+    "@pixi/gif": "^2.1.0",
     "@pixi/layers": "^2.0.1",
     "@pixi/lights": "^4.0.0",
     "@pixi/sound": "^5.1.0",

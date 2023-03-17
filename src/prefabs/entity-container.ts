@@ -94,7 +94,5 @@ export class EntityContainer extends Container implements IEntity {
         return objectContainer;
     }
 
-    spawnedObjectAction (e: any) {
-        e = null;
-    }
+    spawnedObjectAction () {}
 }

@@ -82,8 +82,7 @@ export class AnimalContainer extends EntityContainer {
         return null;
     }
 
-    spawnedObjectAction (e: any) {
-        e = null;
+    spawnedObjectAction () {
         Player.modifyResource(this.resourceName, this.bonus);
     }
 

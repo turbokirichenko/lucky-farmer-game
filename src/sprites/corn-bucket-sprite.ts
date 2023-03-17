@@ -1,5 +1,4 @@
 import { Sprite, Texture } from "pixi.js";
-import { PLACE_HEIGHT, PLACE_WIDTH } from "../shared/constants";
 
 export class CornBucketSprite extends Sprite {
     constructor() {

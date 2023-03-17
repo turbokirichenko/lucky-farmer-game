@@ -4,7 +4,7 @@ import { Player } from '../entities/player';
 import { CornBucketSprite } from '../sprites/corn-bucket-sprite';
 import { EggSprite } from '../sprites/egg-sprite';
 import { MilkSprite } from '../sprites/milk-sprite';
-import { ResourceContainer } from '../prefabs/resource-container';
+import { ResourceContainer } from './resource-container';
 
 export class ResourcesBarContainer extends Container<IScene> implements IScene {
     
@@ -16,7 +16,7 @@ export class ResourcesBarContainer extends Container<IScene> implements IScene {
         this.addChild(...this._slots);
     }
 
-    update(framesPassed: number, timestamp: number) {
+    update(framesPassed: number) {
         const playerData = [
             Player.resources.corn,
             Player.resources.eggs,

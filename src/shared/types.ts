@@ -28,7 +28,7 @@ export interface IDraggable extends DisplayObject {
 
 export interface IEntity {
     pick(newTimestamp: number): DisplayObject | null;
-    spawnedObjectAction(context: any): void;
+    spawnedObjectAction(context?: any): void;
 }
 
 export enum ResourcesBonus {
@@ -42,3 +42,5 @@ export type TilePostfix =
 | "left" | "left-top" | "left-bottom"
 | "right" | "right-top" | "right-bottom"
 | "center" | "top" | "bottom"
+
+export type SizeNames = "Small" | "Medium" | "Large";

@@ -1,5 +1,6 @@
 import { Container, Graphics, Sprite, Text, TextStyle } from "pixi.js";
 import { IScene, Vector2d, EntitiesNames } from "../shared/types";
+import { LINE_COLOR, PLACE_FILL_COLOR, FONTS_COLOR, FONTS_COMMON_SIZES } from "../shared/constants";
 import { Player } from "../entities/player";
 import { DraggableContainer } from "../prefabs/draggable-container";
 import { CornBucketSprite } from "../sprites/corn-bucket-sprite";
@@ -36,7 +37,6 @@ export class EntitySlotContainer extends Container implements IScene {
         this.addChild(this._activeSlot, this._priceSlot, this._draggableContainer);
         this.interactive = true;
         this._draggableContainer.draggable = true;
-        //this.on("pointerup", this.onDiscard);
     }
 
     update() {
@@ -52,8 +52,8 @@ export class EntitySlotContainer extends Container implements IScene {
         const height = 2*slotHeight/3;
         const slot = new Container();
         const rect = new Graphics();
-        rect.lineStyle(4, 0x000000, 1);
-        rect.beginFill(0xc0d470, 1);
+        rect.lineStyle(4, LINE_COLOR, 1);
+        rect.beginFill(PLACE_FILL_COLOR, 1);
         rect.drawRect(0, 0, width, height);
         rect.endFill();
         slot.addChild(rect);
@@ -65,8 +65,8 @@ export class EntitySlotContainer extends Container implements IScene {
         const height = slotHeight/3;
         const slot = new Container();
         const rect = new Graphics();
-        rect.lineStyle(4, 0x000000, 1);
-        rect.beginFill(0xc0d470, 1);
+        rect.lineStyle(4, LINE_COLOR, 1);
+        rect.beginFill(PLACE_FILL_COLOR, 1);
         rect.drawRect(0, 0, width, height);
         rect.endFill();
         const icon = new CornBucketSprite();
@@ -78,8 +78,8 @@ export class EntitySlotContainer extends Container implements IScene {
         const priceString = price > 999 ? "999+" : price.toString();
         const textStyle = new TextStyle({
             fontFamily: 'PixeloidMono',
-            fontSize: 12,
-            fill: 0xffffff,
+            fontSize: FONTS_COMMON_SIZES["Small"].fontSize,
+            fill: FONTS_COLOR,
         });
         const text = new Text(priceString, textStyle);
         text.anchor.set(0.5);

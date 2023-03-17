@@ -1,5 +1,6 @@
 import { Sprite, Container, Graphics, TextStyle, Text } from "pixi.js";
 import { IScene } from "../shared/types";
+import { FONTS_DECREASE_COLOR, FONTS_COLOR, FONTS_INCREASE_COLOR, FONTS_COMMON_SIZES, PLACE_FILL_COLOR, LINE_COLOR } from "../shared/constants";
 
 export class ResourceContainer extends Container implements IScene {
     private _slotSprite: Sprite;
@@ -19,12 +20,11 @@ export class ResourceContainer extends Container implements IScene {
         this._currentValue = data;
         this._borderFrame= new Graphics();
         const lineWidth = 4;
-        const lineColor = 0x000000;
         const lineOpacity = 1;
-        this._borderFrame.lineStyle(lineWidth, lineColor, lineOpacity);
+        this._borderFrame.lineStyle(lineWidth, LINE_COLOR, lineOpacity);
         const framePosX = 0;
         const framePosY = 0;
-        this._borderFrame.beginFill(0xc0d470, 1);
+        this._borderFrame.beginFill(PLACE_FILL_COLOR, 1);
         this._borderFrame.drawRect(framePosX, framePosY, this._slotWidth, this._slotHeight);
         this._borderFrame.endFill();
         this._slot = new Container()
@@ -35,8 +35,8 @@ export class ResourceContainer extends Container implements IScene {
         this._slotSprite.y = slotHeight / 2;
         const textStyle = new TextStyle({
             fontFamily: 'PixeloidMono',
-            fontSize: 16,
-            fill: [0xffffff]
+            fontSize: FONTS_COMMON_SIZES["Small"].fontSize,
+            fill: FONTS_COLOR
         })
         this._slotText = new Text(data.toString(), textStyle);
         this._slotText.x = (3 * slotWidth) / 4;
@@ -51,23 +51,20 @@ export class ResourceContainer extends Container implements IScene {
     }
 
     update(framesPassed: number) {
-        const increaseColor = 0x1cb613;
-        const decreaseColor = 0xec2e1c;
-        const defaultColor = 0xffffff;
         this._slotText.text = Math.ceil(this._currentValue).toString();
         if (Math.ceil(this._currentValue) === this._value) {
             this._currentValue = this._value;
-            this._slotText.style.fill = defaultColor;
+            this._slotText.style.fill = FONTS_COLOR;
             return;
         }
         const diffValue = 0.2;
         if (this._value > this._currentValue) {
             this._currentValue = this._currentValue + diffValue*framesPassed;
-            this._slotText.style.fill = increaseColor;
+            this._slotText.style.fill = FONTS_INCREASE_COLOR;
         }
         else if (this._value < this._currentValue) {
             this._currentValue = this._currentValue - diffValue*framesPassed;
-            this._slotText.style.fill = decreaseColor;
+            this._slotText.style.fill = FONTS_DECREASE_COLOR;
         }
     }
 

@@ -7,10 +7,10 @@ export class LoadingBarContainer extends Container {
     private _barWidth: number;
     private _barHeight: number;
 
-    constructor(barWidth: number, parentWidth: number, parentHeight: number) {
+    constructor(barWidth: number) {
         super();
         this._barWidth = barWidth;
-        this._barHeight = 48;
+        this._barHeight = barWidth/10 + 6;
 
         this._loaderBarBorder = new Graphics();
 
@@ -25,8 +25,8 @@ export class LoadingBarContainer extends Container {
 
         this._loaderBar = new Container();
         this._loaderBar.addChild(this._loaderBarBorder);
-        this._loaderBar.position.x = (parentWidth - this._loaderBar.width) / 2;
-        this._loaderBar.position.y = (parentHeight - this._loaderBar.height) / 2;
+        this._loaderBar.x = -this._barWidth/2;
+        this._loaderBar.y = -this._barHeight/2;
         this.addChild(this._loaderBar);
     }
 
@@ -39,9 +39,7 @@ export class LoadingBarContainer extends Container {
         this._loaderBar.addChild(this._loaderProgress);
     }
 
-    resize(width: number, height: number) {
-        this._loaderBar.position.x = (width - this._loaderBar.width) / 2;
-        this._loaderBar.position.y = (height - this._loaderBar.height) / 2;
+    resize() {
     }
 
     /**
